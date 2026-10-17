@@ -1,0 +1,16 @@
+#!/bin/zsh -l
+# Cutlab.app: запускает сервер монтажки (если не запущен) и открывает окно Cutlab.
+# Логин-оболочка (-l) нужна, чтобы из Finder был тот же python3, что в Терминале.
+NIK="/Users/romanroak/NIK"
+URL="http://127.0.0.1:8777"
+cd "$NIK" || exit 1
+if ! curl -s -o /dev/null "$URL/api/ping"; then
+  # Finder может запустить скрипт под Rosetta (x86_64), а numpy у нас только arm64 — запускаем Python нативно
+  nohup arch -arm64 python3 studio/editor/server.py >> studio/editor/server.log 2>&1 &
+  for i in {1..40}; do curl -s -o /dev/null "$URL/api/ping" && break; sleep 0.25; done
+fi
+if [ -d "/Applications/Google Chrome.app" ]; then
+  open -na "Google Chrome" --args --app="$URL" --user-data-dir="$HOME/Library/Application Support/NickEditor" --window-size=1600,1000
+else
+  open "$URL"
+fi

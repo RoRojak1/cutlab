@@ -1,0 +1,130 @@
+/* Панели (задача 13): проект/настройки, дерево медиа, звуки и музыка, проблемы, надписи, свойства клипа. */
+
+/* --- общие мелочи для левых панелей и инспектора -------------------------------------------- */
+.ar { width: 12px; flex-shrink: 0; text-align: center; color: var(--mu); font-size: 9px; }
+.psearch { margin: 8px 10px 4px; width: calc(100% - 20px); }
+.phint { padding: 8px 12px; color: var(--mu); }
+.pfoot { padding: 6px 12px 10px; color: var(--mu); }
+#menu .mi.dis { color: var(--mu); cursor: default; }
+#menu .mi.dis .mu { color: var(--mu); }
+
+/* --- дерево медиа ---------------------------------------------------------------------------- */
+.tree { padding-bottom: 6px; }
+.tree .ch { cursor: default; font-weight: 500; }
+.tree .ch .ar { color: var(--tx2); }
+.tree .shot { padding-left: 24px; cursor: default; }
+.tree .shot.on { color: #fff; }
+.thumbs { display: flex; gap: 5px; flex-wrap: wrap; padding: 2px 10px 8px 24px; }
+.thumbs { content-visibility: auto; contain-intrinsic-size: auto 50px; }
+.thumbs img { width: 72px; height: 40px; object-fit: cover; border-radius: 4px; cursor: grab; display: block; background: #111; flex-shrink: 0; }
+.thumbs img.used { box-shadow: 0 0 0 2px var(--ac); }
+
+/* --- вкладки внутри панели (звуки/музыка) ----------------------------------------------------- */
+.ptabs { display: flex; gap: 4px; padding: 6px 8px; flex-shrink: 0; }
+.ptabs .tab { cursor: default; }
+
+/* --- строки звуков/музыки --------------------------------------------------------------------- */
+.snd { cursor: grab; gap: 8px; }
+.snd .pl { width: 18px; height: 18px; flex-shrink: 0; display: grid; place-items: center; border-radius: 4px; color: var(--tx2); font-size: 9px; }
+.snd .pl.playing, .snd .pl:hover { color: var(--ac); background: var(--sel); }
+.snd .nm { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.snd .plus { width: 18px; height: 18px; flex-shrink: 0; display: grid; place-items: center; border-radius: 4px; color: var(--mu); }
+.snd .plus:hover { color: var(--ac); background: var(--sel); }
+
+/* --- свойства клипа (.kv переиспользуем из app.css) -------------------------------------------- */
+.kv input, .kv select, .kv textarea { width: 100%; }
+.kv textarea { resize: vertical; min-height: 46px; font: inherit; }
+.kv .row2 { display: flex; align-items: center; gap: 8px; }
+.kv .ro { color: var(--tx2); line-height: 1.4; word-break: break-word; }
+.swatches { display: flex; gap: 7px; align-items: center; }
+.swatch { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 0 0 1px #0004; cursor: pointer; }
+.swatch.on { box-shadow: 0 0 0 2px var(--ac); }
+.selrow { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px 4px; }
+.selrow .btn { flex: 1; }
+
+/* --- правки (задача 14): фильтры, карточки, составитель --------------------------------------- */
+.rfilters { display: flex; gap: 4px; padding: 0 10px 8px; flex-wrap: wrap; }
+.rfilters .rf { padding: 3px 9px; border-radius: 999px; color: var(--mu); font-size: 10.5px; cursor: default; background: var(--row); }
+.rfilters .rf.on { color: #141416; background: var(--ac); font-weight: 600; }
+.rfilters .rf .rfn { opacity: .65; font-variant-numeric: tabular-nums; }
+.cm { margin: 0 8px 8px; padding: 10px 11px; border-radius: 8px; background: var(--card); line-height: 1.45; font-size: 11.5px; cursor: default; }
+/* карточки вне экрана не раскладываются и не рисуются — сотни карточек с превью иначе тормозят всё окно */
+.cm { content-visibility: auto; contain-intrinsic-size: auto 330px; }
+.cm.new, .cm.reopened { box-shadow: inset 3px 0 0 var(--st-new); }
+.cm.working { box-shadow: inset 3px 0 0 var(--st-work); }
+.cm.question { box-shadow: inset 3px 0 0 var(--st-ask); }
+.cm.done, .cm.accepted { box-shadow: inset 3px 0 0 var(--ac); opacity: .78; }
+.cm.flash { outline: 2px solid var(--ac); outline-offset: -2px; }
+.cm .hd { display: flex; gap: 6px; align-items: center; margin-bottom: 4px; font-size: 11px; }
+.cm .ref { font-family: var(--mono); color: var(--ac); font-size: 10.5px; cursor: pointer; }
+.cm .ref:hover { text-decoration: underline; }
+.cm .t { margin-left: auto; font-size: 9.5px; padding: 1px 6px; border-radius: 4px; background: #323236; color: var(--tx2); flex-shrink: 0; }
+.cm .st { font-size: 10px; color: var(--mu); margin-top: 5px; }
+.cm .snap { display: block; margin-top: 6px; max-width: 160px; max-height: 90px; border-radius: 5px; cursor: pointer; }
+.cm .thread { margin-top: 5px; }
+/* речь под кадрами правки */
+.cm .speech { margin: 2px 0 6px; padding: 6px 8px; border-radius: 6px; background: #1a1b1e; color: var(--tx); font-size: 11.5px; line-height: 1.45; cursor: pointer; }
+.cm .speech .sl { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.cm .speech.open .sl { display: block; }
+.cm.same-clip .speech { display: none; }
+.cm.same-clip { margin-top: -4px; }
+.cm .speech .sl + .sl { margin-top: 3px; }
+.cm .speech .sl b { color: var(--tx2); font-family: var(--mono); font-size: 10px; font-weight: 500; }
+.cm .speech .stag { display: inline-block; margin-right: 6px; padding: 0 5px; border-radius: 4px; background: #2d2f33; color: var(--ac); font: 600 9.5px var(--mono); vertical-align: 1px; }
+.cm .speech .sl.en { color: var(--tx2); font-style: italic; }
+.cm .msg { margin-top: 4px; }
+.cm .msg b { color: var(--tx2); }
+.cm .msg.claude b { color: var(--ac); }
+.cm .hf { margin-top: 6px; display: flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 10.5px; color: var(--tx2); }
+.cm .hf label { display: flex; align-items: center; gap: 5px; margin-left: auto; color: var(--mu); font-family: var(--f); cursor: pointer; }
+.cm .actions { display: flex; gap: 6px; margin-top: 7px; }
+.cm .actions .btn { padding: 4px 10px; font-size: 11px; }
+.cm .answer { display: flex; gap: 6px; margin-top: 6px; }
+.cm .answer input { flex: 1; }
+
+.composer { border-top: 1px solid var(--ln); padding: 8px 10px 10px; flex-shrink: 0; }
+.composer textarea { width: 100%; resize: none; min-height: 40px; font: inherit; }
+.composer .chip { margin-top: 6px; font-family: var(--mono); font-size: 10.5px; color: var(--mu); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.composer .crow { display: flex; gap: 6px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+.composer .crow select { font-size: 11px; }
+.composer .hfrow { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 11px; }
+.composer .hfrow label { display: flex; align-items: center; gap: 5px; margin-left: auto; color: var(--mu); cursor: pointer; }
+.composer .price { font-family: var(--mono); color: var(--ac); }
+.composer .atts { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.composer .atts span { font-family: var(--mono); font-size: 10px; background: var(--row); border-radius: 4px; padding: 2px 6px; color: var(--tx2); }
+.composer .send { margin-left: auto; }
+.composer.drop { box-shadow: inset 0 0 0 1.5px var(--acd); }
+
+/* Варианты кадра в карточке правки */
+.cm .by { font-size: 9.5px; color: var(--ac); }
+.vars { margin-top: 6px; }
+.vstrip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding-bottom: 4px; }   /* крупно: по две плитки на всю ширину */
+.var { min-width: 0; border-radius: 7px; background: #1c1c1f; overflow: hidden; outline: 1px solid transparent; }
+.var img, .var video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; cursor: zoom-in; background: #000; }
+.var .vl { display: flex; flex-direction: column; gap: 4px; padding: 5px 7px 7px; font-size: 10.5px; color: var(--tx2); }
+.var .vl .btn, .var .vl .okm { align-self: stretch; text-align: center; }
+.var .btn.sm { padding: 4px 8px; font-size: 11px; }
+.var .okm { color: var(--ac); font-weight: 600; }
+.var.cur { opacity: .7; }
+.var.on { outline-color: var(--ac); box-shadow: 0 0 0 2px rgba(143, 203, 107, var(--glow, .25)); }
+.var.chosen { outline-color: var(--ac); }
+.vars .actions { margin-top: 4px; }
+.vars .vwait { color: var(--mu); font-size: 11px; margin: 2px 0 6px; }
+.vstrip.old { margin-top: 6px; opacity: .6; }
+.mi-new { position: absolute; top: 2px; left: 2px; font-size: 8.5px; padding: 0 4px; border-radius: 3px; background: var(--ac); color: #111; font-weight: 700; pointer-events: none; }
+.thw { position: relative; display: block; }
+
+/* большой просмотр вариантов */
+.lb { position: fixed; inset: 0; z-index: 900; background: rgba(8, 8, 10, .92); display: grid; grid-template-rows: 1fr auto; }
+.lb-stage { display: grid; place-items: center; padding: 28px 70px 8px; min-height: 0; }
+.lb-stage img, .lb-stage video { max-width: 100%; max-height: calc(100vh - 150px); border-radius: 10px; box-shadow: 0 10px 40px #000a; background: #000; }
+.lb-cap { display: flex; align-items: center; gap: 16px; justify-content: center; padding: 12px 20px 22px; color: var(--tx); font-size: 13px; }
+.lb-cap .lb-t { font-weight: 600; } .lb-cap .lb-n { color: var(--mu); font-weight: 400; }
+.lb-cap .lb-note { color: var(--tx2); max-width: 60ch; }
+.lb-cap .lb-speech { color: var(--tx); max-width: 80ch; line-height: 1.45; }
+.lb-cap .lb-speech b { color: var(--ac); font-weight: 600; }
+.lb-cap .okm { color: var(--ac); }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 64px; border-radius: 10px; font-size: 34px; color: #fff; background: #ffffff14; }
+.lb-nav:hover { background: #ffffff26; } .lb-nav.l { left: 14px; } .lb-nav.r { right: 14px; }
+.lb-x { position: absolute; top: 12px; right: 16px; font-size: 26px; color: #fff; width: 38px; height: 38px; border-radius: 8px; background: #ffffff14; }
+.var video.hov { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; cursor: zoom-in; background: #000; }

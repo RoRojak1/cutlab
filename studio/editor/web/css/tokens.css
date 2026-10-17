@@ -1,0 +1,14 @@
+:root {
+  --ac: #8fcb6b; --glow: .25;
+  --out: #141416; --isl: #1c1c1f; --ln: #2a2a2e; --row: #252528; --card: #242427;
+  --tx: #e4e6e9; --mu: #80848b; --tx2: #c9ccd1;
+  --sel: color-mix(in srgb, var(--ac) 17%, #1c1c1f); --acd: color-mix(in srgb, var(--ac) 38%, #1c1c1f);
+  --st-new: #ff8a4c; --st-work: #6aa9ff; --st-ask: #f2c14e; --st-done: var(--ac); --ph: #ff5c5c; --bad: #ff6b6b;
+  --c-image: #3a3f47; --c-nick: #34383a; --c-text: color-mix(in srgb, var(--ac) 30%, #1c1c1f); --c-voice: color-mix(in srgb, var(--ac) 80%, #000);
+  --c-music: #2e3440; --c-sfx: #8a4a2a; --c-pause: #3b3b40;
+  --rad: 10px; --gap: 6px;
+  --f: Inter, -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --f-display: "Avenir Next Condensed", "DIN Condensed", Impact, sans-serif;
+  color-scheme: dark;
+}

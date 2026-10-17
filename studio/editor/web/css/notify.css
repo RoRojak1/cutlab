@@ -1,0 +1,48 @@
+/* Уведомления (баннеры + колокольчик) — задача 15. */
+#toasts { position: fixed; top: 52px; right: 16px; z-index: 80; display: flex; flex-direction: column; gap: 8px; width: 360px; pointer-events: none; }
+.banner { pointer-events: auto; background: #1f1f23ee; backdrop-filter: blur(10px); border: 1px solid #2f2f35; border-radius: 12px; box-shadow: 0 14px 40px #000a, inset 3px 0 0 var(--ac);
+  padding: 11px 34px 11px 14px; position: relative; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s; animation: bin .35s cubic-bezier(.2,.8,.2,1); touch-action: pan-y; }
+.banner.q { box-shadow: 0 14px 40px #000a, inset 3px 0 0 var(--st-ask); } .banner.err { box-shadow: 0 14px 40px #000a, inset 3px 0 0 var(--bad); }
+.banner h4 { margin: 0 0 4px; font-size: 12.5px; } .banner .it { font-size: 11.5px; color: var(--tx2); line-height: 1.5; }
+.banner .it a { color: var(--ac); font-family: var(--mono); font-size: 10.5px; cursor: pointer; margin-right: 6px; } .banner .it a:hover { text-decoration: underline; }
+.banner .x { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%; color: var(--mu); }
+.banner .x:hover { background: var(--row); color: var(--tx); }
+.banner.fly { transform: translate(var(--fx), var(--fy)) scale(.15); opacity: 0; }
+@keyframes bin { from { transform: translateX(40px); opacity: 0; } }
+#bellPanel { position: fixed; top: 46px; right: 12px; width: 380px; max-height: 70vh; overflow: auto; z-index: 70; background: #1f1f23; border: 1px solid var(--ln); border-radius: 12px; box-shadow: 0 20px 50px #000b; }
+#bellPanel .bh { display: flex; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--ln); font-weight: 600; }
+#bellPanel .bh button { margin-left: auto; color: var(--ac); font-size: 11.5px; }
+#bellPanel .bn { padding: 9px 14px; border-bottom: 1px solid #26262b; } #bellPanel .bn.unread { background: color-mix(in srgb, var(--ac) 6%, transparent); }
+#bellPanel .bn .tm { color: var(--mu); font-size: 10.5px; font-family: var(--mono); }
+
+/* Общие мелкие помощники для окон справки/поиска/версий/дубляжа/настроек (задача 16) — общий #modal/.dlg из ui.js/app.css. */
+.hsearch { width: 100%; margin-bottom: 10px; }
+.hsec { margin-bottom: 16px; } .hsec h5 { margin: 0 0 6px; font-size: 11.5px; color: var(--mu); text-transform: uppercase; letter-spacing: .05em; }
+.htbl { width: 100%; border-collapse: collapse; }
+.htbl tr { border-bottom: 1px solid #26262b; }
+.htbl td { padding: 5px 0; font-size: 12px; vertical-align: top; }
+.htbl td:first-child { width: 190px; white-space: nowrap; }
+.hsec p { margin: 0 0 8px; line-height: 1.5; color: var(--tx2); font-size: 12px; }
+kbd.k { display: inline-block; background: #16161a; border: 1px solid var(--ln); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; font-family: var(--mono); font-size: 10.5px; margin-right: 2px; }
+.srow { display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 6px; margin: 0 6px; cursor: default; }
+.srow:hover, .srow.on { background: var(--sel); }
+.srow .tag { color: var(--mu); font-size: 10px; text-transform: uppercase; letter-spacing: .04em; width: 52px; flex-shrink: 0; }
+.srow .tc { font-family: var(--mono); color: var(--ac); font-size: 10.5px; flex-shrink: 0; }
+.srow .tx { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vrow { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-bottom: 1px solid #26262b; }
+.vrow .tm { font-family: var(--mono); color: var(--mu); font-size: 10.5px; width: 108px; flex-shrink: 0; }
+.vrow .lb { flex: 1; } .vrow .dur { color: var(--mu); font-size: 10.5px; font-family: var(--mono); }
+.langs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; padding: 2px 0 10px; }
+.langs label { display: flex; align-items: center; gap: 7px; padding: 4px 2px; }
+.langs input[type=checkbox] { margin: 0; }
+.dubprice { font-family: var(--mono); color: var(--ac); font-size: 13px; margin: 6px 0; }
+.approve { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--row); border-radius: 8px; margin: 10px 0; }
+.settrow { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+.settrow .lb { width: 150px; flex-shrink: 0; }
+.settrow input[type=range] { flex: 1; }
+.settrow .val { width: 40px; text-align: right; font-family: var(--mono); color: var(--mu); font-size: 11px; }
+#bellPanel .bn .it { font-size: 11.5px; color: var(--tx2); line-height: 1.5; } #bellPanel .bn .it a { color: var(--ac); font-family: var(--mono); font-size: 10.5px; cursor: pointer; margin-right: 6px; } #bellPanel .bn .it a:hover { text-decoration: underline; }
+.dubs { margin-bottom: 12px; } .dubs .mh { font-size: 10.5px; color: var(--mu); margin-bottom: 4px; }
+.dubrow { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid #26262b; font-size: 12px; }
+.dubrow b { font-family: var(--mono); color: var(--ac); width: 24px; } .dubrow .mu { margin-left: auto; font-size: 10.5px; }
+.dubrow a.btn { text-decoration: none; color: var(--tx); }

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Cutlab</title>
+  <link rel="manifest" href="/web/manifest.webmanifest">
+  <link rel="icon" href="/web/icon-32.png">
+  <link rel="apple-touch-icon" href="/web/icon-180.png">
+  <link rel="stylesheet" href="/web/css/tokens.css"><link rel="stylesheet" href="/web/css/app.css">
+  <link rel="stylesheet" href="/web/css/timeline.css"><link rel="stylesheet" href="/web/css/panels.css"><link rel="stylesheet" href="/web/css/notify.css">
+</head>
+<body>
+<div id="app" class="isl">
+  <header class="ttl" id="titlebar">
+    <button id="appBtn" class="pw app" data-tip="Проекты, настройки, версии, окно, справка"><b>Cutlab</b><i>▾</i></button>
+    <button id="verBtn" class="pw" data-tip="Версии проекта">Версии <i>▾</i></button>
+    <span class="sp"></span>
+    <button id="scopeBtn" class="pw" data-tip="Что играть">Весь выпуск <i>▾</i></button>
+    <button id="playBtn" class="ic run" data-tip="Пуск / пауза" data-key="Пробел">▶</button>
+    <button id="renderBtn" class="ic" data-tip="Готовый MP4 — будет на этапе 3" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10.5M7.6 10.4 12 14.8l4.4-4.4M5 19.3h14"/></svg></button>
+    <button id="dubBtn" class="pw" data-tip="Дубляж на другие языки">Дубляж</button>
+    <span style="width:32px"></span>
+    <button id="searchBtn" class="ic" data-tip="Найти кадр, слово, звук, правку" data-key="⌘K"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m20 20-4.6-4.6"/></svg></button>
+    <button id="helpBtn" class="ic" data-tip="Справка" data-key="?"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M9.5 9.5a2.6 2.6 0 0 1 5 .8c0 1.8-2.5 2.3-2.5 3.9M12 16.9v.2"/></svg></button>
+    <button id="settingsBtn" class="ic" data-tip="Настройки"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h8.5M17.5 7.5H20M4 16.5h2.5M11.5 16.5H20"/><circle cx="15" cy="7.5" r="2.3"/><circle cx="9" cy="16.5" r="2.3"/></svg></button>
+    <button id="bellBtn" class="ic" data-tip="Уведомления"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 16V11a5.8 5.8 0 0 1 11.6 0v5l1.6 1.8H4.6Z"/><path d="M10 20.3a2.3 2.3 0 0 0 4 0"/></svg><span class="dot" hidden></span></button>
+    <button id="fixBtn" class="pill" data-tip="Отправить новые правки Claude" disabled>✦ Исправить · <b id="fixN">0</b></button>
+  </header>
+  <main class="main">
+    <nav class="stripe l">
+      <button class="ic on" data-panel="media" data-tip="Медиа"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="7" width="13" height="10.5" rx="2"/><path d="M7.5 3.8h9.7a3 3 0 0 1 3 3v8.4"/><path d="m3.8 15.2 3.4-3.1a1.4 1.4 0 0 1 1.9 0l3.9 3.6"/><circle cx="12.4" cy="10.6" r="1.2"/></svg></button>
+      <button class="ic" data-panel="sounds" data-tip="Звуки и музыка"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5v3M8 7v10M12 4v16M16 8v8M20 10.5v3"/></svg></button>
+      <button class="ic" data-panel="text" data-tip="Надписи"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 7.5V5h13v2.5M12 5v14M9 19h6"/></svg></button>
+      <span class="gap"></span>
+      <button class="ic" data-panel="problems" data-tip="Проблемы: клипы без файла на диске"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 4.6a2 2 0 0 1 3.4 0l7 12.2a2 2 0 0 1-1.7 3H5a2 2 0 0 1-1.7-3Z"/><path d="M12 9.5v4M12 16.6v.2"/></svg></button>
+      <span style="height:6px"></span>
+    </nav>
+    <section class="col l"><div class="island" id="panelLeft" style="flex:1.3"></div><div class="island" id="inspector" style="flex:1"></div></section>
+    <section class="col c">
+      <div class="island" id="viewerIsland" style="flex:1">
+        <div class="tabs" id="tabs"></div>
+        <div class="stage-wrap"><div id="stage"><canvas id="cv" width="1920" height="1080"></canvas><div id="overlay"></div></div></div>
+        <div class="ctl" id="ctl"></div>
+      </div>
+      <div class="island tlw" id="timeline"></div>
+    </section>
+    <section class="col r" id="reviewCol"><div class="island" id="review" style="flex:1"></div></section>
+    <nav class="stripe r" hidden><button class="ic" id="reviewToggle" data-tip="Показать «Правки»"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.3c4.5 0 8.2 3 8.2 6.8s-3.7 6.8-8.2 6.8c-.95 0-1.86-.13-2.7-.38L5.3 19.3l1.05-3.25C4.8 14.8 3.8 13.05 3.8 11.1 3.8 7.3 7.5 4.3 12 4.3Z"/><circle class="f" cx="8.4" cy="11.1" r="1.05"/><circle class="f" cx="12" cy="11.1" r="1.05"/><circle class="f" cx="15.6" cy="11.1" r="1.05"/></svg><b class="cnt" hidden></b></button></nav>
+  </main>
+  <footer class="status" id="statusbar"><span class="dot"></span><span id="projName" class="projname" data-tip="Настройки проекта">…</span><span id="crumbs"></span>
+    <span class="rt"><span id="tc">0:00.00</span><span>30 fps</span><span>1080p</span><span id="saveState">● сохранено</span><span id="claudeState" class="offline">Claude не подключён</span></span></footer>
+</div>
+<div id="toasts"></div><div id="bellPanel" hidden></div><div id="modal" hidden></div><div id="menu" hidden></div><div id="tooltip" hidden></div>
+<script type="module" src="/web/js/main.js"></script>
+</body>
+</html>

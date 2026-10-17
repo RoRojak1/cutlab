@@ -1,0 +1,49 @@
+.tlw { height: 262px; flex-shrink: 0; position: relative; }
+.tl-ruler { height: 22px; margin-left: 164px; border-bottom: 1px solid var(--ln); position: relative; cursor: text; }
+.tl-ruler canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tl-body { position: relative; flex: 1; overflow: hidden; }
+.trk { height: 30px; display: flex; align-items: center; border-bottom: 1px solid #242427; position: relative; }
+.trk.voice { height: 44px; }
+.trk .nm { width: 164px; flex-shrink: 0; padding: 0 8px 0 10px; color: var(--tx2); font-size: 11.5px; display: grid; grid-template-columns: 16px 1fr 21px 21px; column-gap: 6px; align-items: center; height: 100%; border-right: 1px solid #242427; }
+.trk .nm .ti { display: grid; place-items: center; color: var(--mu); }
+.trk .nm .ti svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.trk .nm .tn { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trk .nm .tg { width: 22px; height: 20px; border-radius: 5px; display: grid; place-items: center; color: #6b6f76; }
+.trk .nm .tg:hover { background: var(--row); color: var(--tx); }
+.trk .nm .tg svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.trk .nm .tg.eye .off { display: none; } .trk .nm .tg.eye:not(.on) .on { display: none; } .trk .nm .tg.eye:not(.on) .off { display: inline; }
+.trk .nm .tg.eye.on { color: var(--ac); }
+.trk .nm .tg.solo { font-size: 10px; font-weight: 700; } .trk .nm .tg.solo.on { color: #141416; background: var(--ac); }
+.trk.off .nm .tn, .trk.off .nm .ti { opacity: .45; }
+.trk.off .lane { opacity: .35; }
+.lane { flex: 1; height: 24px; position: relative; margin-right: 10px; overflow: hidden; }
+.trk.voice .lane { height: 38px; }
+.cl { position: absolute; top: 0; height: 24px; border-radius: 5px; overflow: hidden; display: flex; align-items: center; padding: 0 6px; font-size: 10px; white-space: nowrap; color: #fff; background: var(--c-image); background-size: cover; background-position: center; }
+.cl span { position: relative; text-shadow: 0 1px 2px #000; pointer-events: none; }
+.cl.sel { box-shadow: 0 0 0 2px var(--ac); z-index: 2; }
+.cl.drop { box-shadow: 0 0 0 2px var(--st-work); }
+.cl.nick { background-color: var(--c-nick); } .cl.text { background: var(--c-text); color: #f4ffe6; }
+.cl.music { background: var(--c-music); } .cl.sfx { background: var(--c-sfx); }
+.cl.voice { background: transparent; } .cl.pause { background: repeating-linear-gradient(135deg, #3b3b40 0 4px, #2a2a2e 4px 8px); }
+.cl.missing { background: repeating-linear-gradient(135deg, #5a1f1f 0 5px, #2a1212 5px 10px) !important; }
+.cl .edge { position: absolute; top: 0; bottom: 0; width: 7px; cursor: ew-resize; z-index: 3; } .cl .edge.l { left: 0; } .cl .edge.r { right: 0; }
+.cl .fade { position: absolute; top: 0; bottom: 0; pointer-events: none; background: linear-gradient(90deg, #0008, transparent); }
+.cl .fade.out { right: 0; background: linear-gradient(270deg, #0008, transparent); }
+.lane canvas.wave { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.tl-words { position: absolute; left: 164px; right: 10px; height: 13px; pointer-events: none; }
+.tl-ov { position: absolute; inset: 0; pointer-events: none; }
+.tl-ovc { position: absolute; top: 0; bottom: 0; left: 164px; right: 10px; overflow: hidden; pointer-events: none; }
+/* красная линия: видно 2 px, а хватать можно за полосу 12 px и за «шапку» на линейке */
+.tl-ov .ph { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ph); z-index: 5; pointer-events: auto; cursor: ew-resize; }
+.tl-ov .ph::before { content: ""; position: absolute; top: 0; left: -6px; width: 14px; height: 14px; background: var(--ph); clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%); }
+.tl-ov .ph::after { content: ""; position: absolute; top: 0; bottom: 0; left: -5px; width: 12px; }
+.tl-ov .ph:hover, .tl-ov .ph.drag { box-shadow: 0 0 0 1px color-mix(in srgb, var(--ph) 45%, transparent); }
+body.scrubbing, body.scrubbing * { cursor: ew-resize !important; user-select: none; }
+/* рамка правки не перехватывает клики по клипам; кликабельна только плашка 💬 — она на линейке, чтобы не закрывать названия клипов */
+.tl-ovc .rng { position: absolute; top: 0; bottom: 0; background: linear-gradient(transparent 22px, color-mix(in srgb, var(--st-new) 11%, transparent) 22px); border-left: 1.5px dashed var(--st-new); border-right: 1.5px dashed var(--st-new); pointer-events: none; }
+.tl-ovc .rng b { position: absolute; top: 3px; left: 3px; background: var(--st-new); color: #1b1b1b; font-size: 9px; line-height: 14px; padding: 0 4px; border-radius: 4px; pointer-events: auto; cursor: pointer; }
+.tl-ovc .rng.working { border-color: var(--st-work); background: linear-gradient(transparent 22px, color-mix(in srgb, var(--st-work) 10%, transparent) 22px); } .tl-ovc .rng.working b { background: var(--st-work); }
+.tl-ovc .selrng { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--ac) 10%, transparent); border-left: 1px solid var(--ac); border-right: 1px solid var(--ac); }
+.tl-ov .snapline { position: absolute; top: 22px; bottom: 0; width: 1px; background: var(--ac); box-shadow: 0 0 6px var(--ac); }
+.tl-ov .dragtip { position: absolute; top: 24px; transform: translateX(-50%); background: #26262b; border: 1px solid var(--acd); color: var(--tx); font: 10.5px var(--mono); padding: 2px 7px; border-radius: 5px; white-space: nowrap; z-index: 6; }
+.tl-ov .marquee { position: absolute; border: 1px solid var(--ac); background: color-mix(in srgb, var(--ac) 8%, transparent); }
